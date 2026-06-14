@@ -1,0 +1,120 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--primary);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.75rem;
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --background: #f0f2f5;
+  --foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --accent: #ff4d00;
+  --accent-foreground: #ffffff;
+  --secondary: #3b82f6;
+  --secondary-foreground: #ffffff;
+  --muted: #e6e8eb;
+  --muted-foreground: #5a5a5a;
+  --border: #000000;
+  --ring: #000000;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+    font-family: var(--font-sans);
+  }
+  ::selection {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+}
+
+@utility kinetic-border {
+  box-shadow: 4px 4px 0 0 var(--color-primary);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 0 var(--color-primary);
+  }
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 var(--color-primary);
+  }
+}
+
+@utility kinetic-border-sm {
+  box-shadow: 2px 2px 0 0 var(--color-primary);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  &:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 var(--color-primary);
+  }
+  &:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0 0 0 0 var(--color-primary);
+  }
+}
+
+@utility grid-bg {
+  background-image: radial-gradient(var(--color-primary) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.05;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-spin-slow { animation: spin-slow 8s linear infinite; }
+.animate-float { animation: float-y 4s ease-in-out infinite; }
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-slide-up { animation: slide-up 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
